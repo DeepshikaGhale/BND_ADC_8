@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Form </title>
+</head>
+<body>
+    <form method="POST" action="update/{{lyrics.id}}">
+        {% csrf_token %}
+        Update Username: <input name="Lyrics_UserName" type="text" value ={{lyrics.UserName}}> <br>
+        Update SongName: <input name="Lyrics_SongName" type="text" value={{lyrics.SongName}}> <br>
+        Update Lyrics: <input name="Lyrics_Lyric" type="text" value={{lyrics.Lyric}}> <br>
+        <input type="submit">
+       
+    </form>
+
+</body>
+</html>
