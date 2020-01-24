@@ -1,2 +1,6 @@
-# BND_ADC_8
-Continuous Assessment III
+# bnd_adc8-1-
+Coursework
+Bibek Khadka
+Biju Maharjhan
+Deepshika Ghale
+Nisha Basnet
