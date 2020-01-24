@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>List of Lyrics</title>
+</head>
+<body>
+    <form  method="post" action="update/{{lyric.id}}">
+        <h1> List of Lyrics</h1>
+        {% for lyrics in lyrics %}
+        Lyrics's Uploader : {{lyrics.UserName}} <br>
+        Lyrics's SongName : {{lyrics.SongName}} <br>
+        Lyrics's Lyric : {{lyrics.Lyric}}<br>
+        <a href="edit/{{lyrics.id}}">Edit this</a> <br>
+        ======================================== <br>
+        {% empty %}
+        There are no Lyrics availble.
+        {% endfor %}
+    </form>
+</body>
+</html>
