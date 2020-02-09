@@ -1,26 +1,24 @@
-from django.shortcuts import render
-from .  models import Lyrics 
-from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib import messages
+from django.shortcuts import render,redirect
+from .models import Users
+
+
+
+
+def index(request):
+    
+    
+    return render(request, 'index.html')
+
+def download_image(request):
+    users = Users.objects.all()
+    return render(request, 'image.html' , {'users': users})
+
+def uploadImage(request):
+    print("Request Handling...")
+    p = request.FILES['image']
+    from .models import Users
+    user = Users(pic =p)
+    user.save()
+    return redirect(index)
+
  
- #create yours views here.
-def search(request):
-    if request.method == "POST":
-        music = request.POST['srh']
-
-        if music:
-            match = Lyrics.objects.filter(SongName__istartswith=music)
-                                          
-            if match:
-                return render(request, 'Search.html', {'sr':match})
-
-            else:
-                return HttpResponse('<H1> No result found</H1>')
-
-        else:
-            return HttpResponse('<H1>Type the Song Name</H1>')
-
-    else:
-        return render(request,'Search.html')
-
-
