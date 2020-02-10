@@ -14,7 +14,6 @@ urlpatterns = [
     path('login', view_login_user, name="login"),
     path('logout/', view_logout, name="logout"),
     path('home/', home),
-    #pagination
-    path('Lyrics/pagination/<int:SIZE>/<int:PAGENO>', views.list_Lyric_pagination, name='list_Lyric_pagination'),
+
 
 ]

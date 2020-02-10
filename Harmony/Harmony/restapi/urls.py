@@ -1,7 +1,10 @@
 from django.urls import path
-from .views import *
+from . import views
 
 urlpatterns = [
-    path('lyrics/',view_get_post_lyrics),
-    path('lyrics/<int:ID>',view_getByID_updateByID_deleteByID),
+    path('api/pagination/<int:PAGENO>/<int:SIZE>/', views.api_pagination, name='list_Lyric_pagination'),
+    #path('api/',view_get_post_lyrics),
+    #path('api/<int:ID>/',view_getByID_updateByID_deleteByID),
+    #pagination
+    
 ]

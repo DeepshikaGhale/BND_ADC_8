@@ -66,11 +66,18 @@ def view_getByID_updateByID_deleteByID(request,ID):
         lyrics=Lyrics.objects.get(id=ID)
         lyrics.delete()
         return JsonResponse({
-          "message": "Deleted Successfully"
+        "message": "Deleted Successfully"
         })
-        
+            
     else:
         return JsonResponse({
         "message":" Other http verbs Testing"
         })
+
+#pagination
+def api_pagination(request, PAGENO, SIZE):
+    skip = SIZE * (PAGENO - 1)
+    lyrics = Lyrics.objects.all()[skip: (PAGENO * SIZE)]
+    dict_value = {"lyrics": list(lyrics.values("UserName","SongName","Lyric"))}
+    return JsonResponse(dict_value)
 

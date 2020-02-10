@@ -98,9 +98,3 @@ def home(request):
     return render(request, 'home.html')
 
 
-#pagination
-def list_Lyric_pagination(request, SIZE, PAGENO):
-    skip = SIZE * (PAGENO - 1)
-    Lyric = Lyrics.objects.all()[skip: (PAGENO * SIZE)]
-    return render(request, 'Lyrics.html', {'lyrics': Lyric })
-

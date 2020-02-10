@@ -19,5 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('', include('Harmonyapp.urls')),
     path('admin/', admin.site.urls),
-    path('restapi/', include('restapi.urls')),
+    path('', include('restapi.urls')),
 ]
