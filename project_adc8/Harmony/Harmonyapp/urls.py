@@ -16,5 +16,8 @@ urlpatterns = [
     path('login',view_login_user,name="login"),
     path('logout/',view_logout,name="logout"),
     path('home/',home),
+    path('signup/login.html',view_login_user,name="login"),
+    path('delete/<int:ID>',view_lyrics_delete), 
+    
 
 ]

@@ -1,23 +1,45 @@
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet", href="{% static 'css/bootstrap.min.css' %}">
     <title>List of Lyrics</title>
+
 </head>
 <body>
-    <form  method="post" action="update/{{lyric.id}}">
-        <h1> List of Lyrics</h1>
-        {% for lyrics in lyrics %}
-        Lyrics's Uploader : {{lyrics.UserName}} <br>
-        Lyrics's SongName : {{lyrics.SongName}} <br>
-        Lyrics's Lyric : {{lyrics.Lyric}}<br>
-        <a href="edit/{{lyrics.id}}">Edit this</a> <br>
-        ======================================== <br>
-        {% empty %}
-        There are no Lyrics availble.
-        {% endfor %}
+    
+    <form  method="post" action="update/{{lyrics.id}}">
+     <div class="container mt-5">
+         <table class="table">
+             <thead>
+                 <tr>
+                     <td>Lyrics's Uploader</td>
+                     <td>Lyrics's SongName</td>
+                     <td>Lyrics's Lyric</td>
+                     <td>Update Lyrics</td>
+                     <td>Delete Lyrics</td>
+                 </tr>
+             </thead>
+
+             <tbody>
+
+                {% for lyrics in lyrics %}
+                <tr>
+                    <td> {{lyrics.UserName}}   </td>
+                    <td> {{lyrics.SongName}}</td>
+                    <td>{{lyrics.Lyric}}</td>
+                    <td> <a href="edit/{{lyrics.id}}">Update Lyrics</a> </td>
+                    <td> <a href="delete/{{lyrics.id}}">Delete Lyrics</a> </td>
+                </tr>
+                {% empty %}
+                There are no Lyrics available.
+                {% endfor %}
+             </tbody>
+         </table>
+     </div>
     </form>
 </body>
 </html>

@@ -35,20 +35,20 @@ class Lyrics(models.Model):
     UserName = models.CharField(max_length=100)
     SongName = models.CharField(max_length=100)
     Lyric = models.TextField()
-    Lyrics = models.ManyToManyField(User)
-    music_lyrics = models.ForeignKey(Music, on_delete=models.CASCADE)
+    #Lyrics = models.ManyToManyField(User)
+    #music_lyrics = models.ForeignKey(Music, on_delete=models.CASCADE)
     #objects = LyricManager()
     def __str__(self):
         return self.UserName + ' ' + self.SongName + ' ' + self.Lyric 
 
 
-class Users(models.Model):
-    UserName = models.CharField(max_length=100)
-    email = models.CharField(max_length=100)
-    address = models.CharField(max_length=100)
-    User = models.ManyToManyField(Music)
-    Users = models.ManyToManyField(Lyrics)
+#class Users(models.Model):
+   # UserName = models.CharField(max_length=100)
+    #email = models.CharField(max_length=100)
+    #address = models.CharField(max_length=100)
+    #User = models.ManyToManyField(Music)
+    #Users = models.ManyToManyField(Lyrics)
     #objects = LyricManager()
-    def __str__(self):
-        return self.UserName + ' ' + self.email + ' ' + self.address
+    #def __str__(self):
+     #   return self.UserName + ' ' + self.email + ' ' + self.address
 

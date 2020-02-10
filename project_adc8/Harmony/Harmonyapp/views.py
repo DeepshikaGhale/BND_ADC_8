@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse,HttpResponseForbidden
+from django.http import HttpResponse,HttpResponseForbidden,JsonResponse
 from django.template import Template,Context
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 #from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
 def view_Lyrics_page(request):
@@ -31,8 +32,8 @@ def view_Lyricsdata_save(request):
         print(type(get_UserName))
         Lyrics_obj = Lyrics(UserName=get_UserName,SongName=get_SongName,Lyric=get_Lyric)
         Lyrics_obj.save()
-        return HttpResponse("Saved")
-        #return redirect('Harmonyapp/Lyricsdata')
+        return render(request, 'saved.html')
+       # return redirect('Lyricsdata')
     else:
         return HttpResponse("Error record saving")
 
@@ -53,18 +54,40 @@ def view_update_form_data_in_db(request,ID):
     Lyrics_obj.UserName = request.POST['Lyrics_UserName']
     Lyrics_obj.SongName =request.POST['Lyrics_SongName']
     Lyrics_obj.Lyric = request.POST['Lyrics_Lyric']
+    Lyrics_obj.save()
     
     return HttpResponse("Record Is Succesfully Updated!")     
 
+def view_lyrics_delete(request,ID):
+    #print(ID)
+    #lyrics_obj=Lyrics.objects.get(id=ID)
+    #context_varible = {
+     #   'lyrics':lyrics_obj
+    #}
+    #lyrics_obj.delete()
+    #return render(request,'Lyrics.html',context_varible)
+    if  request.method == "DELETE":
+        lyrics=Lyrics.objects.get(id=ID)
+        lyrics.delete()
+        return JsonResponse({
+          "message": "Deleted Successfully"
+        })
 def view_register_user(request):
     if request.method =="GET":
         return render(request,'register.html')
     else:
         print(request.POST)
+        username=request.POST['input_Username']
+        password=request.POST['input_Password']
+        email=request.POST['input_Email']
+    if User.objects.filter(username=username).exists():
+        messages.success(request, "this username is taken")
+        return render(request, 'register.html')
+    else:        
         user = User.objects.create_user(username=request.POST['input_Username'],password=request.POST['input_Password'],email=request.POST['input_Email'])
         user.save()
-        return HttpResponse("Signup Successful")
-
+        return redirect("login.html")
+        #return HttpResponse("Signup Successful")
 
 def view_login_user(request):
     if request.method =="GET":
@@ -77,7 +100,7 @@ def view_login_user(request):
             login(request,user)
             return render(request,"page.html")
         else:
-            return redirect("login") 
+            return redirect("login.html") 
 
 def view_logout(request):
     if (not request.user.is_authenticated):
