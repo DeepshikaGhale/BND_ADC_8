@@ -6,8 +6,6 @@ from django.contrib.auth import authenticate, login, logout
 #from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.shortcuts import render,redirect
-
 
 # Create your views here.
 def view_Lyrics_page(request):
@@ -61,11 +59,19 @@ def view_update_form_data_in_db(request,ID):
     return HttpResponse("Record Is Succesfully Updated!")     
 
 def view_lyrics_delete(request,ID):
-    print(ID)
-    lyrics_obj=Lyrics.objects.get(id=ID)
-    lyrics_obj.delete()
-    return redirect('/Lyricsdata/')
-   
+    #print(ID)
+    #lyrics_obj=Lyrics.objects.get(id=ID)
+    #context_varible = {
+     #   'lyrics':lyrics_obj
+    #}
+    #lyrics_obj.delete()
+    #return render(request,'Lyrics.html',context_varible)
+    if  request.method == "DELETE":
+        lyrics=Lyrics.objects.get(id=ID)
+        lyrics.delete()
+        return JsonResponse({
+          "message": "Deleted Successfully"
+        })
 def view_register_user(request):
     if request.method =="GET":
         return render(request,'register.html')
@@ -96,10 +102,6 @@ def view_login_user(request):
         else:
             return redirect("login.html") 
 
-def view_index(request):
-    return render(request, 'page.html')
-
-
 def view_logout(request):
     if (not request.user.is_authenticated):
         return HttpResponseForbidden('Please LogIn for Logging out!')
@@ -107,32 +109,7 @@ def view_logout(request):
     return redirect('login')
 
 
-#Search
-from django.shortcuts import render
-from .  models import Lyrics 
-from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib import messages
- 
- #create yours views here.
-def search(request):
-    if request.method == "POST":
-        music = request.POST['srh']
-
-        if music:
-            match = Lyrics.objects.filter(SongName__istartswith=music)
-                                          
-            if match:
-                return render(request, 'Search.html', {'sr':match})
-
-            else:
-                return HttpResponse('<H1> No result found</H1>')
-
-        else:
-            return HttpResponse('<H1>Type the Song Name</H1>')
-
-    else:
-        return render(request,'Search.html')
-
-
+def home(request):
+    return render(request, 'home.html')
 
 
