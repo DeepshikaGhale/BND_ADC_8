@@ -2,7 +2,7 @@
 
 from django.contrib import admin
 from django.urls import path
-from .views import *
+from . views import *
 
 urlpatterns = [ 
     path('Lyrics/',view_Lyrics_page), 
@@ -14,10 +14,11 @@ urlpatterns = [
     #SignUp, Login, Logout
     path('signup/',view_register_user),
     path('login',view_login_user,name="login"),
-    path('logout/',view_logout,name="logout"),
-    path('home/',home),
+    path('signup/logout/',view_logout,name="logout"),
+    path('logout/',view_logout),
     path('signup/login.html',view_login_user,name="login"),
-    path('delete/<int:ID>',view_lyrics_delete), 
-    
-
+    path('Lyricsdata/delete/<int:ID>',view_lyrics_delete), 
+    path('search/', search),
+    path('index/',view_index,name="index")
 ]
+

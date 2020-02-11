@@ -41,7 +41,37 @@ class Lyrics(models.Model):
     def __str__(self):
         return self.UserName + ' ' + self.SongName + ' ' + self.Lyric 
 
+    def lyrics_Username_not_null(self):
+        if self.UserName == " ":
+            return False
+        else:
+            return True
 
+    def lyrics_SongName_not_null(self):
+
+        if self.SongName == " ":
+            return False
+        else:
+            return True
+
+    def lyrics_lyric_not_null(self):
+        if self.Lyric == " ":
+            return False
+        else:
+            return True        
+                
+    def lyrics_Username__null(self):
+        if self.UserName == " ":
+            return True
+        else:
+            return False
+
+    def lyrics_SongName__null(self):
+
+        if self.SongName == " ":
+            return True
+        else:
+            return False
 #class Users(models.Model):
    # UserName = models.CharField(max_length=100)
     #email = models.CharField(max_length=100)
