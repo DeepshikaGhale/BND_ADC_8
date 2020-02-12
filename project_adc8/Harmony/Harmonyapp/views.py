@@ -59,19 +59,11 @@ def view_update_form_data_in_db(request,ID):
     return HttpResponse("Record Is Succesfully Updated!")     
 
 def view_lyrics_delete(request,ID):
-    #print(ID)
-    #lyrics_obj=Lyrics.objects.get(id=ID)
-    #context_varible = {
-     #   'lyrics':lyrics_obj
-    #}
-    #lyrics_obj.delete()
-    #return render(request,'Lyrics.html',context_varible)
-    if  request.method == "DELETE":
-        lyrics=Lyrics.objects.get(id=ID)
-        lyrics.delete()
-        return JsonResponse({
-          "message": "Deleted Successfully"
-        })
+    print(ID)
+    lyrics_obj=Lyrics.objects.get(id=ID)
+    lyrics_obj.delete()
+    return render(request,'Lyrics.html')
+    
 def view_register_user(request):
     if request.method =="GET":
         return render(request,'register.html')
@@ -109,7 +101,7 @@ def view_logout(request):
     return redirect('login')
 
 
-def home(request):
-    return render(request, 'home.html')
+def view_home_page(request):
+    return render(request, 'page.html')
 
 
